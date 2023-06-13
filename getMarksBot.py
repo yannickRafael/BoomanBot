@@ -3,9 +3,12 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 chrome_options = Options()
-chrome_options.add_argument("--start-maximized")
+chrome_options.add_argument("--headless")
 
 
 
@@ -17,7 +20,9 @@ def getNotas():
     print('==BOT STARTED==')
     driver = webdriver.Chrome(options=chrome_options)
     def click(path):
-        driver.find_element(By.XPATH, path).click()
+        wait = WebDriverWait(driver, 10)
+        element = wait.until(EC.visibility_of_element_located((By.XPATH, path)))
+        element.click()
 
     def insert(path, content):
         driver.find_element(By.XPATH, path).send_keys(content)
@@ -32,12 +37,21 @@ def getNotas():
     click('//*[@id="content"]/div/center/a[2]')
     click('//*[@id="container"]/table/tbody/tr[4]/td[1]')
     click('//*[@id="latnav"]/ul/li[5]/a')
-    driver.find_element(By.LINK_TEXT, 'Inteligência Artificial').click()
-    click('//*[@id="latnav"]/ul[1]/li[4]/a')
-    driver.find_element(By.LINK_TEXT, 'Rendimento académico').click()
+    wait = WebDriverWait(driver, 10)
+    element = wait.until(EC.visibility_of_element_located((By.LINK_TEXT,'Inteligência Artificial')))
+    element.click()
 
-    
-    tabela = driver.find_element(By.XPATH, '//*[@id="main"]/table')
+    click('//*[@id="latnav"]/ul[1]/li[4]/a')
+    wait = WebDriverWait(driver, 10)
+    element = wait.until(EC.visibility_of_element_located((By.LINK_TEXT, 'Rendimento académico')))
+    element.click()
+
+
+   
+
+    wait = WebDriverWait(driver, 10)
+    element = wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="main"]/table')))
+    tabela = element
     screenshot = tabela.screenshot_as_base64
 
     # Salve a captura de tela em um arquivo
