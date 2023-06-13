@@ -35,24 +35,20 @@ def bot():
     number = request.form.get('From')
     print(user_msg)
     send('Comando recebido, buscando notas', number) 
-   
 
-    if user_msg == 'getNotas':
-        tabela = bt.getNotas()
-        tamanho = len(tabela)
-        meio1 = tamanho // 4
-        meio2 = meio1 * 2
-        meio3 = meio1 * 3
-        tab1 = tabela[:meio1]
-        tab2 = tabela[meio1:meio2]
-        tab3 = tabela[meio2:meio3]
-        tab4 = tabela[meio3:]
+    keys = user_msg.split('/')
 
-        send(getContent(tab1), number)
-        send(getContent(tab2), number)
-        send(getContent(tab3), number)
-        send(getContent(tab4), number)
-    return jsonify({'message': 'Success'})
+    if(len(keys)==3):
+        text = ''
+        result = bt.getNotas(keys[0], keys[1], keys[2])
+        for i in result:
+            text = text + str(i)
+        send(text, number)
+        return jsonify({'message': 'Success'})
+    else:
+        return jsonify({'message': 'Faliure'})   
+
+    
 
   
 if __name__ == "__main__":
