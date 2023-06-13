@@ -87,12 +87,9 @@ def getNotas(curso, cadeira, nr):
             retorno.append(line)
     else:
         print("aluno nao encontrado")
-    
 
     return retorno
 
-
-    time.sleep(10)
 
 
 
