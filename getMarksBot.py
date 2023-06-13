@@ -94,8 +94,5 @@ def getNotas(curso, cadeira, nr):
 
     time.sleep(10)
 
-getNotas('LECC', 'Arquitectura', '7189')
-
-
 
 
