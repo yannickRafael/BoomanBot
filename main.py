@@ -16,7 +16,7 @@ def getContent(tabela):
 
 def send(message, number):
     account_sid = 'ACa5c83e45677a24409033440f8499727b'
-    auth_token = '4fe2c205a0bb3e88c24302af80b4057a'
+    auth_token = '4fa8e282d88e547c2b171857a31e1196'
     client = Client(account_sid, auth_token)	
     message = client.messages.create(
     from_='whatsapp:+14155238886',
@@ -40,10 +40,17 @@ def bot():
 
     if(len(keys)==3):
         text = ''
-        result = bt.getNotas(keys[0], keys[1], keys[2])
-        for i in result:
-            text = text + str(i)
-        send(text, number)
+        result = bt.getNotas(keys[0].strip(), keys[1].strip(), keys[2].strip())
+        print(keys[0])
+        print(keys[1])
+        print(keys[2])
+        if(len(result)==0):
+            send("Estudante nao encontrado", number)
+        else:
+            print(len(result))
+            for i in result:
+                text = text + str(i)+"\n"
+            send(text, number)
         return jsonify({'message': 'Success'})
     else:
         return jsonify({'message': 'Faliure'})   
