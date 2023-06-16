@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from selenium.common.exceptions import NoSuchElementException
-
+#1
 
 
 chrome_options = Options()
@@ -18,22 +18,22 @@ wait = WebDriverWait(driver, 10)  # Ajuste o tempo
 
 
 def clickXPATh(path):
-    time.sleep(5)
+    time.sleep(30)
     element = driver.find_element(By.XPATH, path)
     element.click()
 
 def clickLink(link):
-    time.sleep(5)
+    time.sleep(30)
     element = driver.find_element(By.PARTIAL_LINK_TEXT, link)
     element.click()
 
 def insert(path, data):
-    time.sleep(5)
+    time.sleep(30)
     element = driver.find_element(By.XPATH, path)
     element.send_keys(data)
 
 def encontrar(numero_estudante):
-    time.sleep(10)
+    time.sleep(30)
     encontrado: bool
     dados = []
     detalhes = []

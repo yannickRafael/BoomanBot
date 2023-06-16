@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from twilio.twiml.messaging_response import MessagingResponse
 import getMarksBot as bt
 from twilio.rest import Client
-
+#1
 
 def getContent(tabela):
     retorno = ' '
