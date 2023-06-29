@@ -147,6 +147,7 @@ def getNotas(curso, cadeira, nr):
     clickLink('Rendimento académico')
 
     encontrado, dados, detalhes, maximos = encontrar(nr)
+    print(len(dados))
     retorno = []
     if(encontrado):
         print("aluno encontrado")
