@@ -49,7 +49,7 @@ def insert(path, data):
         except:
             pass
 
-def  find_estudante(numero_estudante):
+def  find_dados(numero_estudante):
     b = True
     while b == True:
         try:
@@ -60,7 +60,7 @@ def  find_estudante(numero_estudante):
         except:
             pass
 
-def find_dados():
+def find_descricao():
     b = True
     while b == True:
         try:
@@ -71,7 +71,7 @@ def find_dados():
         except:
             pass
 
-def find_detalhes():
+def find_maximos():
     b = True
     while b == True:
         try:
@@ -88,7 +88,7 @@ def encontrar(numero_estudante):
     
     encontrado: bool
     dados = []
-    detalhes = []
+    descricao = []
     maximos = []
     try:
         time.sleep(5)
@@ -96,7 +96,7 @@ def encontrar(numero_estudante):
         
         
         # Extrair dados adicionais da linha de estudante (tr)
-        linha_estudante = find_estudante(numero_estudante)
+        linha_estudante = find_dados(numero_estudante)
         dados_colunas1 = linha_estudante.find_elements(By.TAG_NAME, "td")
         for coluna in dados_colunas1:
             texto_coluna = coluna.text
@@ -105,16 +105,16 @@ def encontrar(numero_estudante):
         encontrado = True
 
         # Extrair dados adicionais da linha da descricao (tr)
-        linha_descricao = find_dados()
-        dados_colunas2 = linha_estudante.find_elements(By.TAG_NAME, "th")
+        linha_descricao = find_descricao()
+        dados_colunas2 = linha_descricao.find_elements(By.TAG_NAME, "th")
         for coluna in dados_colunas2:
             texto_coluna = coluna.text
            
-            detalhes.append(texto_coluna)
+            descricao.append(texto_coluna)
         
         # Extrair dados adicionais da linha dos valores maximos (tr)
-        linha_detalhes = find_detalhes()
-        dados_colunas3 = linha_detalhes.find_elements(By.TAG_NAME, "td")
+        linha_maximos = find_maximos()
+        dados_colunas3 = linha_maximos.find_elements(By.TAG_NAME, "td")
         for coluna in dados_colunas3:
             texto_coluna = coluna.text
            
@@ -122,10 +122,10 @@ def encontrar(numero_estudante):
 
         encontrado = True
 
-        return encontrado, dados, detalhes, maximos
+        return encontrado, dados, descricao, maximos
     except NoSuchElementException:
         encontrado = False
-        return encontrado, dados, detalhes, maximos
+        return encontrado, dados, descricao, maximos
     
 
     
@@ -146,20 +146,20 @@ def getNotas(curso, cadeira, nr):
     clickXPATh('//*[@id="latnav"]/ul[1]/li[4]/a')
     clickLink('Rendimento académico')
 
-    encontrado, dados, detalhes, maximos = encontrar(nr)
+    encontrado, dados, descricao, maximos = encontrar(nr)
     print(len(dados))
     retorno = []
     if(encontrado):
         print("aluno encontrado")
-        print(len(detalhes))
+        print(len(descricao))
         print(len(maximos))
         
         for i in range(0, len(dados)):
             if i >=3:
-                line = detalhes[i]+ ': '+ dados[i]+'/'+maximos[i-1]
+                line = descricao[i]+ ': '+ dados[i]+'/'+maximos[i-1]
                 retorno.append(line)
             else:
-                line = detalhes[i]+ ': '+ dados[i]
+                line = descricao[i]+ ': '+ dados[i]
                 retorno.append(line)
 
     else:
