@@ -16,7 +16,7 @@ def getContent(tabela):
 
 def send(message, number):
     account_sid = 'ACa5c83e45677a24409033440f8499727b'
-    auth_token = '4e2b8437a273e23b808e78befb50461d'
+    auth_token = 'b419ced7a21ab0cb7bb434f6cf8842fd'
     client = Client(account_sid, auth_token)	
     message = client.messages.create(
     from_='whatsapp:+14155238886',
