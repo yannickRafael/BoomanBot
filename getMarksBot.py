@@ -18,37 +18,85 @@ wait = WebDriverWait(driver, 10)  # Ajuste o tempo
 
 
 def clickXPATh(path):
-    time.sleep(30)
-    element = driver.find_element(By.XPATH, path)
-    element.click()
+    b = True
+    while b == True:
+        try:
+            element = driver.find_element(By.XPATH, path)
+            element.click()
+            b=False
+        except:
+            pass
 
 def clickLink(link):
-    time.sleep(30)
-    element = driver.find_element(By.PARTIAL_LINK_TEXT, link)
-    element.click()
+    b = True
+    while b == True:
+        try:
+            element = driver.find_element(By.PARTIAL_LINK_TEXT, link)
+            element.click()
+            b=False
+        except:
+            pass
+    
+    
 
 def insert(path, data):
-    time.sleep(30)
-    element = driver.find_element(By.XPATH, path)
-    element.send_keys(data)
+    b = True
+    while b == True:
+        try:
+            element = driver.find_element(By.XPATH, path)
+            element.send_keys(data)
+            b=False
+        except:
+            pass
+
+def  find_estudante(numero_estudante):
+    b = True
+    while b == True:
+        try:
+            xpath1 = f"//table//td[contains(text(), '{numero_estudante}')]/parent::tr"
+            linha_estudante = driver.find_element(By.XPATH, xpath1)
+            b = False
+            return linha_estudante
+        except:
+            pass
+
+def find_dados():
+    b = True
+    while b == True:
+        try:
+            xpath2 = "//table//th[contains(text(), 'Número')]/parent::tr"
+            linha_descricao = driver.find_element(By.XPATH, xpath2)
+            b = False
+            return linha_descricao
+        except:
+            pass
+
+def find_detalhes():
+    b = True
+    while b == True:
+        try:
+            xpath3 = "//table//td[b[contains(text(), 'Máxima')]]/parent::tr"
+            linha_detalhes = driver.find_element(By.XPATH, xpath3)
+            b = False
+            return linha_detalhes
+        except:
+            pass
+
+
 
 def encontrar(numero_estudante):
-    time.sleep(30)
+    
     encontrado: bool
     dados = []
     detalhes = []
     maximos = []
     try:
         time.sleep(5)
-        xpath1 = f"//table//td[contains(text(), '{numero_estudante}')]/parent::tr"
-        xpath2 = "//table//th[contains(text(), 'Número')]/parent::tr"
-        xpath3 = "//table//td[b[contains(text(), 'Máxima')]]/parent::tr"
-        linha_estudante = driver.find_element(By.XPATH, xpath1)
-        linha_descricao = driver.find_element(By.XPATH, xpath2)
-        linha_detalhes = driver.find_element(By.XPATH, xpath3)
-
+        
+        
+        
         # Extrair dados adicionais da linha de estudante (tr)
-        dados_colunas1 = linha_estudante.find_elements(By.TAG_NAME, "td")
+        dados_colunas1 = (find_estudante).find_elements(By.TAG_NAME, "td")
         for coluna in dados_colunas1:
             texto_coluna = coluna.text
           
@@ -56,14 +104,14 @@ def encontrar(numero_estudante):
         encontrado = True
 
         # Extrair dados adicionais da linha da descricao (tr)
-        dados_colunas2 = linha_descricao.find_elements(By.TAG_NAME, "th")
+        dados_colunas2 = (find_dados).find_elements(By.TAG_NAME, "th")
         for coluna in dados_colunas2:
             texto_coluna = coluna.text
            
             detalhes.append(texto_coluna)
         
         # Extrair dados adicionais da linha dos valores maximos (tr)
-        dados_colunas3 = linha_detalhes.find_elements(By.TAG_NAME, "td")
+        dados_colunas3 = (find_detalhes).find_elements(By.TAG_NAME, "td")
         for coluna in dados_colunas3:
             texto_coluna = coluna.text
            
