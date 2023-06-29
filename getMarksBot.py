@@ -96,7 +96,8 @@ def encontrar(numero_estudante):
         
         
         # Extrair dados adicionais da linha de estudante (tr)
-        dados_colunas1 = (find_estudante).find_elements(By.TAG_NAME, "td")
+        linha_estudante = find_estudante(numero_estudante)
+        dados_colunas1 = linha_estudante.find_elements(By.TAG_NAME, "td")
         for coluna in dados_colunas1:
             texto_coluna = coluna.text
           
@@ -104,14 +105,16 @@ def encontrar(numero_estudante):
         encontrado = True
 
         # Extrair dados adicionais da linha da descricao (tr)
-        dados_colunas2 = (find_dados).find_elements(By.TAG_NAME, "th")
+        linha_descricao = find_dados()
+        dados_colunas2 = linha_estudante.find_elements(By.TAG_NAME, "th")
         for coluna in dados_colunas2:
             texto_coluna = coluna.text
            
             detalhes.append(texto_coluna)
         
         # Extrair dados adicionais da linha dos valores maximos (tr)
-        dados_colunas3 = (find_detalhes).find_elements(By.TAG_NAME, "td")
+        linha_detalhes = find_detalhes()
+        dados_colunas3 = linha_detalhes.find_elements(By.TAG_NAME, "td")
         for coluna in dados_colunas3:
             texto_coluna = coluna.text
            
