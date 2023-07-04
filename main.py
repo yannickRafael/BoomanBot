@@ -68,6 +68,7 @@ def bot():
 
   
 if __name__ == "__main__":
-    app.run()
     print('main() iniciado')
+    app.run()
+
     
