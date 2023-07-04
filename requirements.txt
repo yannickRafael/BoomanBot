@@ -2,5 +2,7 @@ selenium
 beautifulsoup4
 Flask
 twilio
+requests
+pandas
 
 

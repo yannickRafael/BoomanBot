@@ -1,11 +1,3 @@
-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-import time
-from selenium.common.exceptions import NoSuchElementException
-from openpyxl import load_workbook
 import main3 as m3
 from config import login_url
 import pandas as pd
