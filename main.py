@@ -39,17 +39,26 @@ def bot():
     keys = user_msg.split('/')
 
     if(len(keys)==3):
-        text = ''
-        result = bt.getNotas(keys[0].strip(), keys[1].strip(), keys[2].strip())
-        print(keys[0])
-        print(keys[1])
-        print(keys[2])
-        if(len(result)==0):
+
+        primeira_linha, linhas_encontradas, ultima_linha = bt.getNotas(keys[0], keys[1], keys[2])
+
+        ans = []
+        for i in range(0, len(linhas_encontradas)):
+            if i >= 2:
+                text = linhas_encontradas[i] + ': ' + primeira_linha[i] + '/' + ultima_linha[i - 1]
+                ans.append(text)
+            if i < 2:
+                text = linhas_encontradas[i] + ': ' + primeira_linha[i]
+                ans.append(text)
+
+        text = ""
+        for i in ans:
+            text = text + i + '\n'
+
+
+        if(len(linhas_encontradas)==0):
             send("Estudante nao encontrado", number)
         else:
-            print(len(result))
-            for i in result:
-                text = text + str(i)+"\n"
             send(text, number)
         return jsonify({'message': 'Success'})
     else:
