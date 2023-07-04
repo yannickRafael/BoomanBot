@@ -29,6 +29,7 @@ app = Flask(__name__)
   
 # chatbot logic
 def bot():
+    print('bot() iniciado')
     # user input
     user_msg = request.values.get('Body', '')
     number = request.form.get('From')
@@ -68,4 +69,5 @@ def bot():
   
 if __name__ == "__main__":
     app.run()
+    print('main() iniciado')
     
